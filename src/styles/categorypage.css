@@ -1,0 +1,23 @@
+.reels-scroll-wrapper {
+  overflow-x: auto;
+  overflow-y: hidden;
+  width: 100%;
+  cursor: grab;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.reels-scroll-wrapper::-webkit-scrollbar {
+  display: none;
+}
+
+.reels-scroll-wrapper:active {
+  cursor: grabbing;
+}
+
+.reels-track {
+  display: flex;
+  gap: 16px;
+  width: max-content;
+}

@@ -1,0 +1,38 @@
+.gallery-page {
+  padding: 48px 24px;
+}
+
+.reel-section {
+  margin-bottom: 56px;
+}
+
+.reel-section-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 24px;
+}
+
+.reels-scroll-wrapper {
+  overflow-x: auto;
+  overflow-y: hidden;
+  width: 100%;
+  cursor: grab;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.reels-scroll-wrapper::-webkit-scrollbar {
+  display: none;
+}
+
+.reels-scroll-wrapper:active {
+  cursor: grabbing;
+}
+
+.reels-track {
+  display: flex;
+  gap: 16px;
+  width: max-content;
+}

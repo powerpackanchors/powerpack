@@ -1,0 +1,56 @@
+.artist-section {
+  padding: 48px 0;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.artist-section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 48px;
+}
+
+.artist-section-title {
+  font-size: 32px;
+  font-family: 'Syne', sans-serif;
+  color: var(--text-primary);
+}
+
+.artist-count-pill {
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-color);
+  padding: 6px 16px;
+  border-radius: 50px;
+  font-size: 13px;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.artists-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.artist-section-footer {
+  display: flex;
+  justify-content: center;
+  margin-top: 48px;
+}
+
+@media (max-width: 768px) {
+  .artists-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .artist-section-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+  
+  .artist-section {
+    padding: 36px 0;
+  }
+}
