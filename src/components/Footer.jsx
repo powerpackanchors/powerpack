@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { FiInstagram, FiYoutube } from 'react-icons/fi';
+import { FiInstagram, FiPhone } from 'react-icons/fi';
 import { FaWhatsapp } from 'react-icons/fa';
 import '../styles/footer.css';
 
@@ -29,13 +29,26 @@ const Footer = () => {
           </span>
           
           <div className="footer-socials">
-            <a href="#" className="social-icon">
+            <a 
+              href="https://www.instagram.com/powerpack_community/" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="social-icon"
+            >
               <FiInstagram />
             </a>
-            <a href="#" className="social-icon">
-              <FiYoutube />
+            <a 
+              href="tel:9574188444" 
+              className="social-icon"
+            >
+              <FiPhone />
             </a>
-            <a href="#" className="social-icon">
+            <a 
+              href="https://wa.me/919574188444" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="social-icon"
+            >
               <FaWhatsapp />
             </a>
           </div>

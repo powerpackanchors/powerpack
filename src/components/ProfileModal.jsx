@@ -28,7 +28,7 @@ const ProfileModal = ({ artist, onClose }) => {
 
   const handleWhatsapp = () => {
     const message = encodeURIComponent(`Hi, I would like to enquire about booking ${artist.name || ''}.`);
-    window.open(`https://wa.me/${artist.whatsappNumber || ''}?text=${message}`, '_blank');
+    window.open(`https://wa.me/${919574188444 || ''}?text=${message}`, '_blank');
   };
 
   const getInitials = (name) => {
