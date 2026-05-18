@@ -106,7 +106,9 @@ const Home = ({ onArtistClick }) => {
       <FounderSection />
       
       <div id="contact">
-        <CTASection />
+        <section id="cta-section" className="cta-section">
+          <CTASection />
+        </section>
       </div>
     </>
   );

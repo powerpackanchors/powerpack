@@ -7,7 +7,11 @@ const FounderSection = () => {
       <div className="section-container founder-container">
         <div className="founder-image-wrapper">
           <div className="founder-image-border">
-            <div className="founder-image-placeholder"></div>
+            <img
+              src="https://res.cloudinary.com/dp3osieuu/image/upload/v1779105855/1760003849507.jpg_juudsv.png"
+              alt="Akash Ada — Founder PowerPack"
+              className="founder-img"
+            />
           </div>
         </div>
         

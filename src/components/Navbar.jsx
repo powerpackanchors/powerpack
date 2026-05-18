@@ -1,11 +1,33 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { FiMenu, FiX } from 'react-icons/fi';
 import '../styles/navbar.css';
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const handleBookArtist = () => {
+    setMobileMenuOpen(false);
+    if (location.pathname === '/') {
+      // Already on homepage — just scroll
+      const ctaSection = document.getElementById('cta-section');
+      if (ctaSection) {
+        ctaSection.scrollIntoView({ behavior: 'smooth' });
+      }
+    } else {
+      // On another page — navigate to homepage then scroll
+      navigate('/');
+      setTimeout(() => {
+        const ctaSection = document.getElementById('cta-section');
+        if (ctaSection) {
+          ctaSection.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 500);
+    }
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -30,7 +52,7 @@ const Navbar = () => {
         <Link to="/" onClick={() => setMobileMenuOpen(false)}>Home</Link>
         <Link to="/anchors" onClick={() => setMobileMenuOpen(false)}>Artists</Link>
         <Link to="/gallery" onClick={() => setMobileMenuOpen(false)}>Gallery</Link>
-        <button className="navbar-book-btn">Book an Artist</button>
+        <button className="navbar-book-btn nav-cta" onClick={handleBookArtist}>Book an Artist</button>
       </div>
 
       <button 
