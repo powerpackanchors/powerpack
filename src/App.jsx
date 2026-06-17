@@ -9,6 +9,7 @@ import DJsPage from './pages/DJsPage';
 import ChoreographersPage from './pages/ChoreographersPage';
 import ReelCreatorsPage from './pages/ReelCreatorsPage';
 import GalleryPage from './pages/GalleryPage';
+import JoinPage from './pages/JoinPage';
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -42,6 +43,7 @@ function App() {
           <Route path="/choreographers" element={<ChoreographersPage onArtistClick={handleArtistClick} />} />
           <Route path="/reel-creators" element={<ReelCreatorsPage onArtistClick={handleArtistClick} />} />
           <Route path="/gallery" element={<GalleryPage />} />
+          <Route path="/join" element={<JoinPage />} />
         </Routes>
       </main>
       
