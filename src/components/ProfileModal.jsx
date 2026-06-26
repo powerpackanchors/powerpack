@@ -64,8 +64,8 @@ const ProfileModal = ({ artist, onClose }) => {
 
         <div className="modal-stats-grid">
           <div className="modal-stat-box">
-            <span className="modal-stat-value">{artist.feeRange || 'Contact for pricing'}</span>
-            <span className="modal-stat-label">Starting Fee</span>
+            <span className="modal-stat-value">{artist.city || 'N/A'}</span>
+            <span className="modal-stat-label">City</span>
           </div>
           <div className="modal-stat-box">
             <span className="modal-stat-value">{artist.experience || 'N/A'}</span>

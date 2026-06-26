@@ -21,7 +21,7 @@ const JoinPage = () => {
     tier: '',
     city: '',
     bio: '',
-    feeRange: '',
+    instagramHandle: '',
     experience: '',
     eventsCount: '',
     whatsappNumber: '',
@@ -37,6 +37,15 @@ const JoinPage = () => {
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value })
+  }
+
+  const handleBioChange = (e) => {
+    const text = e.target.value
+    const wordCount = text.trim().split(/\s+/).filter(Boolean).length
+
+    if (wordCount <= 50) {
+      setFormData({ ...formData, bio: text })
+    }
   }
 
   const handlePhotoChange = (e) => {
@@ -77,7 +86,7 @@ const JoinPage = () => {
         tier: formData.tier,
         city: formData.city,
         bio: formData.bio,
-        feeRange: formData.feeRange,
+        instagramHandle: formData.instagramHandle,
         experience: formData.experience,
         eventsCount: formData.eventsCount,
         whatsappNumber: formData.whatsappNumber,
@@ -173,10 +182,10 @@ const JoinPage = () => {
             <label>Tier *</label>
             <select name="tier" value={formData.tier} onChange={handleChange} required>
               <option value="">Select tier</option>
-              <option value="Elite">Elite (₹40,000+)</option>
-              <option value="Premium">Premium (₹25,000–40,000)</option>
-              <option value="Official">Official (₹15,000–25,000)</option>
-              <option value="Open">Open (Up to ₹15,000)</option>
+              <option value="Elite">Elite</option>
+              <option value="Premium">Premium</option>
+              <option value="Official">Official</option>
+              <option value="Open">Open</option>
             </select>
           </div>
 
@@ -186,8 +195,8 @@ const JoinPage = () => {
           </div>
 
           <div className="join-field">
-            <label>Fee Range</label>
-            <input type="text" name="feeRange" value={formData.feeRange} onChange={handleChange} placeholder="e.g. ₹15,000–25,000" />
+            <label>Instagram Handle</label>
+            <input type="text" name="instagramHandle" value={formData.instagramHandle} onChange={handleChange} placeholder="@yourusername" />
           </div>
 
           <div className="join-field">
@@ -211,8 +220,14 @@ const JoinPage = () => {
           </div>
 
           <div className="join-field full">
-            <label>Bio</label>
-            <textarea name="bio" value={formData.bio} onChange={handleChange} placeholder="Tell us about yourself..." rows={4} />
+            <label>Bio ({formData.bio.trim().split(/\s+/).filter(Boolean).length}/50 words)</label>
+            <textarea
+              name="bio"
+              value={formData.bio}
+              onChange={handleBioChange}
+              placeholder="Tell us about yourself..."
+              rows={4}
+            />
           </div>
         </div>
 
