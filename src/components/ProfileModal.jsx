@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FiX, FiCheckCircle, FiStar, FiPhone } from 'react-icons/fi';
 import { FaWhatsapp } from 'react-icons/fa';
 import { urlFor } from '../sanityClient';
@@ -17,6 +17,15 @@ const formatEvents = (count) => {
 }
 
 const ProfileModal = ({ artist, onClose }) => {
+  const [copied, setCopied] = useState(false)
+
+  const handleCopyInstagram = () => {
+    if (artist.instagramHandle) {
+      navigator.clipboard.writeText(artist.instagramHandle)
+      setCopied(true)
+      setTimeout(() => setCopied(false), 1500)
+    }
+  }
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.key === 'Escape') onClose();
@@ -87,9 +96,13 @@ const ProfileModal = ({ artist, onClose }) => {
             <span className="modal-stat-value">{formatEvents(artist.eventsCount)}</span>
             <span className="modal-stat-label">Events</span>
           </div>
-          <div className="modal-stat-box">
-            <span className="modal-stat-value">{artist.instagramHandle || 'N/A'}</span>
-            <span className="modal-stat-label">Instagram</span>
+          <div className="modal-stat-box instagram-stat" onClick={handleCopyInstagram}>
+            <span className="modal-stat-value instagram-handle">
+              {copied ? 'Copied!' : (artist.instagramHandle || 'N/A')}
+            </span>
+            <span className="modal-stat-label">
+              Instagram {artist.instagramHandle && <span className="copy-icon">⧉</span>}
+            </span>
           </div>
         </div>
 

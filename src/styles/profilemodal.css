@@ -129,6 +129,8 @@
   border-radius: 12px;
   padding: 16px 12px;
   text-align: center;
+  min-width: 0;
+  overflow: hidden;
 }
 
 .modal-stat-value {
@@ -138,6 +140,13 @@
   color: var(--text-primary);
   display: block;
   margin-bottom: 4px;
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+.modal-stat-value.instagram-handle {
+  font-size: 13px;
+  line-height: 1.3;
 }
 
 .modal-stat-label {
@@ -270,4 +279,19 @@
   .modal-specs-grid {
     grid-template-columns: 1fr;
   }
+}
+
+.instagram-stat {
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.instagram-stat:hover {
+  background: #1a1528;
+}
+
+.copy-icon {
+  font-size: 11px;
+  margin-left: 4px;
+  color: #a78bfa;
 }
