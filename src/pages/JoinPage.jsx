@@ -143,10 +143,22 @@ const JoinPage = () => {
 
         <div className="join-photo-upload">
           <div className="photo-preview">
-            {photoPreview
-              ? <img src={photoPreview} alt="Preview" />
-              : <div className="photo-placeholder">Upload Photo</div>
-            }
+            {photoPreview ? (
+              <img
+                src={photoPreview}
+                alt="Preview"
+                onError={(e) => {
+                  e.target.style.display = 'none'
+                  e.target.nextSibling.style.display = 'flex'
+                }}
+              />
+            ) : null}
+            <div
+              className="photo-placeholder"
+              style={{ display: photoPreview ? 'none' : 'flex' }}
+            >
+              {photo ? '✓ Photo selected' : 'Upload Photo'}
+            </div>
           </div>
           <label className="photo-upload-btn">
             Choose Photo
