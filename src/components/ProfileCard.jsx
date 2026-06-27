@@ -2,6 +2,18 @@ import React from 'react';
 import { urlFor } from '../sanityClient';
 import '../styles/profilecard.css';
 
+const formatExperience = (exp) => {
+  if (!exp) return 'N/A'
+  const isOnlyNumber = /^\d+$/.test(exp.trim())
+  return isOnlyNumber ? `${exp} years` : exp
+}
+
+const formatEvents = (count) => {
+  if (!count) return 'N/A'
+  const isOnlyNumber = /^\d+$/.test(count.trim())
+  return isOnlyNumber ? `${count}+` : count
+}
+
 const ProfileCard = ({ artist, onClick }) => {
   const getTierClass = (tier) => {
     return tier ? `tier-${tier.toLowerCase()}` : '';
@@ -38,11 +50,11 @@ const ProfileCard = ({ artist, onClick }) => {
 
       <div className="card-stats">
         <div className="mini-stat">
-          <span className="mini-stat-value">{artist.experience || 'N/A'}</span>
+          <span className="mini-stat-value">{formatExperience(artist.experience)}</span>
           <span className="mini-stat-label">Experience</span>
         </div>
         <div className="mini-stat">
-          <span className="mini-stat-value">{artist.eventsCount || 'N/A'}</span>
+          <span className="mini-stat-value">{formatEvents(artist.eventsCount)}</span>
           <span className="mini-stat-label">Events</span>
         </div>
       </div>

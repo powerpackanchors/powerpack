@@ -4,6 +4,18 @@ import { FaWhatsapp } from 'react-icons/fa';
 import { urlFor } from '../sanityClient';
 import '../styles/profilemodal.css';
 
+const formatExperience = (exp) => {
+  if (!exp) return 'N/A'
+  const isOnlyNumber = /^\d+$/.test(exp.trim())
+  return isOnlyNumber ? `${exp} years` : exp
+}
+
+const formatEvents = (count) => {
+  if (!count) return 'N/A'
+  const isOnlyNumber = /^\d+$/.test(count.trim())
+  return isOnlyNumber ? `${count}+` : count
+}
+
 const ProfileModal = ({ artist, onClose }) => {
   useEffect(() => {
     const handleKeyDown = (e) => {
@@ -68,18 +80,16 @@ const ProfileModal = ({ artist, onClose }) => {
             <span className="modal-stat-label">City</span>
           </div>
           <div className="modal-stat-box">
-            <span className="modal-stat-value">{artist.experience || 'N/A'}</span>
+            <span className="modal-stat-value">{formatExperience(artist.experience)}</span>
             <span className="modal-stat-label">Experience</span>
           </div>
           <div className="modal-stat-box">
-            <span className="modal-stat-value">{artist.eventsCount || 'N/A'}</span>
+            <span className="modal-stat-value">{formatEvents(artist.eventsCount)}</span>
             <span className="modal-stat-label">Events</span>
           </div>
           <div className="modal-stat-box">
-            <span className="modal-stat-value">
-              {artist.rating || '4.9'}/5 <FiStar style={{ color: '#f59e0b', display: 'inline' }} size={14}/>
-            </span>
-            <span className="modal-stat-label">Rating</span>
+            <span className="modal-stat-value">{artist.instagramHandle || 'N/A'}</span>
+            <span className="modal-stat-label">Instagram</span>
           </div>
         </div>
 
