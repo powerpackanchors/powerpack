@@ -164,7 +164,7 @@ const JoinPage = () => {
 
           <div className="join-field">
             <label>WhatsApp Number *</label>
-            <input type="text" name="whatsappNumber" value={formData.whatsappNumber} onChange={handleChange} placeholder="91XXXXXXXXXX" required />
+            <input type="text" inputMode="tel" name="whatsappNumber" value={formData.whatsappNumber} onChange={handleChange} placeholder="91XXXXXXXXXX" required />
           </div>
 
           <div className="join-field">
@@ -201,12 +201,12 @@ const JoinPage = () => {
 
           <div className="join-field">
             <label>Experience</label>
-            <input type="text" name="experience" value={formData.experience} onChange={handleChange} placeholder="e.g. 5 years" />
+            <input type="text" inputMode="numeric" name="experience" value={formData.experience} onChange={handleChange} placeholder="e.g. 5 years" />
           </div>
 
           <div className="join-field">
             <label>Events Done</label>
-            <input type="text" name="eventsCount" value={formData.eventsCount} onChange={handleChange} placeholder="e.g. 100+" />
+            <input type="text" inputMode="numeric" name="eventsCount" value={formData.eventsCount} onChange={handleChange} placeholder="e.g. 100+" />
           </div>
 
           <div className="join-field full">
