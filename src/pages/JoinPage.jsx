@@ -200,13 +200,27 @@ const JoinPage = () => {
           </div>
 
           <div className="join-field">
-            <label>Experience</label>
-            <input type="text" inputMode="numeric" name="experience" value={formData.experience} onChange={handleChange} placeholder="e.g. 5 years" />
+            <label>Experience (in years)</label>
+            <input
+              type="number"
+              name="experience"
+              value={formData.experience}
+              onChange={handleChange}
+              placeholder="e.g. 5"
+              min="0"
+            />
           </div>
 
           <div className="join-field">
             <label>Events Done</label>
-            <input type="text" inputMode="numeric" name="eventsCount" value={formData.eventsCount} onChange={handleChange} placeholder="e.g. 100+" />
+            <input
+              type="number"
+              name="eventsCount"
+              value={formData.eventsCount}
+              onChange={handleChange}
+              placeholder="e.g. 100"
+              min="0"
+            />
           </div>
 
           <div className="join-field full">
