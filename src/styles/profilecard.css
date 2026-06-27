@@ -123,20 +123,24 @@
   color: var(--text-muted);
 }
 
-.card-tags {
+.p-tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
-  margin-bottom: 24px;
-  flex-grow: 1;
+  gap: 6px;
+  max-width: 100%;
 }
 
-.tag-pill {
-  font-size: 11px;
-  color: var(--text-secondary);
-  border: 1px solid var(--border-color);
+.p-tag {
+  font-size: 10px;
+  color: #666;
+  border: 1px solid #222;
+  border-radius: 6px;
   padding: 4px 10px;
-  border-radius: 50px;
+  white-space: nowrap;
+  max-width: 140px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: inline-block;
 }
 
 .card-footer {

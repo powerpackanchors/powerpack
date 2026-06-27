@@ -60,12 +60,25 @@ const JoinPage = () => {
     const data = new FormData()
     data.append('file', file)
     data.append('upload_preset', CLOUDINARY_PRESET)
+
     const res = await fetch(
       `https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD}/image/upload`,
       { method: 'POST', body: data }
     )
+
+    if (!res.ok) {
+      throw new Error('Failed to upload image. Please try a different photo.')
+    }
+
     const json = await res.json()
-    return json.secure_url
+
+    // Force the returned URL to be JPEG format regardless of original format
+    // Cloudinary URL structure: .../upload/v123456/filename
+    // We insert f_jpg,q_auto to force format conversion
+    const url = json.secure_url
+    const transformedUrl = url.replace('/upload/', '/upload/f_jpg,q_auto/')
+
+    return transformedUrl
   }
 
   const handleSubmit = async (e) => {
@@ -93,32 +106,17 @@ const JoinPage = () => {
         memberSince: formData.memberSince,
         languages: formData.languages.split(',').map(l => l.trim()).filter(Boolean),
         specialisations: formData.specialisations.split(',').map(s => s.trim()).filter(Boolean),
-        ...(photoUrl && {
-          photo: {
-            _type: 'image',
-            asset: {
-              _type: 'reference',
-              _ref: await uploadImageToSanity(photoUrl)
-            }
-          }
-        })
+        photoUrl: photoUrl || ''
       }
 
       await writeClient.create(artistDoc)
       setSubmitted(true)
     } catch (err) {
+      console.error('Submission error:', err)
       setError('Something went wrong. Please try again.')
-      console.error(err)
     } finally {
       setLoading(false)
     }
-  }
-
-  const uploadImageToSanity = async (cloudinaryUrl) => {
-    const res = await fetch(cloudinaryUrl)
-    const blob = await res.blob()
-    const asset = await writeClient.assets.upload('image', blob)
-    return asset._id
   }
 
   if (submitted) {
@@ -152,7 +150,12 @@ const JoinPage = () => {
           </div>
           <label className="photo-upload-btn">
             Choose Photo
-            <input type="file" accept="image/*" onChange={handlePhotoChange} hidden />
+            <input
+              type="file"
+              accept="image/*,.heic,.heif"
+              onChange={handlePhotoChange}
+              hidden
+            />
           </label>
         </div>
 

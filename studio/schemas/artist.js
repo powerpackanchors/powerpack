@@ -31,6 +31,7 @@ export default {
       }
     },
     { name: 'photo', title: 'Photo', type: 'image', options: { hotspot: true } },
+    { name: 'photoUrl', title: 'Photo URL (Cloudinary)', type: 'url' },
     { name: 'bio', title: 'Bio', type: 'text' },
     { name: 'instagramHandle', title: 'Instagram Handle', type: 'string' },
     { name: 'experience', title: 'Experience', type: 'string' },

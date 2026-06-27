@@ -28,7 +28,14 @@ const ProfileCard = ({ artist, onClick }) => {
     <div className="profile-card" onClick={() => onClick(artist)}>
       <div className="card-header">
         <div className="avatar-wrapper">
-          {artist.photo ? (
+          {artist.photoUrl ? (
+            <img 
+              src={artist.photoUrl} 
+              alt={artist.name || 'Artist'} 
+              className="card-avatar-placeholder" 
+              style={{ objectFit: 'cover' }}
+            />
+          ) : artist.photo ? (
             <img 
               src={urlFor(artist.photo).width(120).height(120).quality(80).fit('crop').url()} 
               alt={artist.name || 'Artist'} 
@@ -59,9 +66,9 @@ const ProfileCard = ({ artist, onClick }) => {
         </div>
       </div>
 
-      <div className="card-tags">
+      <div className="p-tags">
         {(artist.specialisations || []).map((spec, index) => (
-          <span key={index} className="tag-pill">{spec}</span>
+          <span key={index} className="p-tag">{spec}</span>
         ))}
       </div>
 

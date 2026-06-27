@@ -64,7 +64,14 @@ const ProfileModal = ({ artist, onClose }) => {
         <button className="modal-close" onClick={onClose}><FiX /></button>
         
         <div className="modal-header">
-          {artist.photo ? (
+          {artist.photoUrl ? (
+            <img 
+              src={artist.photoUrl} 
+              alt={artist.name || ''} 
+              className="modal-avatar-placeholder" 
+              style={{ objectFit: 'cover' }}
+            />
+          ) : artist.photo ? (
             <img 
               src={urlFor(artist.photo).width(200).height(200).quality(85).fit('crop').url()} 
               alt={artist.name || ''} 
