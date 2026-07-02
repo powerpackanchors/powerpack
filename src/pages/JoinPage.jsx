@@ -14,6 +14,32 @@ const writeClient = createClient({
 const CLOUDINARY_CLOUD = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME
 const CLOUDINARY_PRESET = import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET
 
+const cleanInstagramHandle = (value) => {
+  if (!value) return ''
+
+  // Remove full URL and extract username
+  if (value.includes('instagram.com')) {
+    const match = value.match(/instagram\.com\/([^/?]+)/)
+    if (match && match[1]) {
+      return '@' + match[1].replace(/\/$/, '')
+    }
+  }
+
+  // Add @ if not present
+  if (!value.startsWith('@')) {
+    return '@' + value
+  }
+
+  return value
+}
+
+const validateWhatsApp = (number) => {
+  const cleaned = number.replace(/\D/g, '')
+  if (cleaned.length === 10) return '91' + cleaned
+  if (cleaned.length === 12 && cleaned.startsWith('91')) return cleaned
+  return null
+}
+
 const JoinPage = () => {
   const [formData, setFormData] = useState({
     name: '',
@@ -36,7 +62,12 @@ const JoinPage = () => {
   const [error, setError] = useState('')
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value })
+    const { name, value } = e.target
+    if (name === 'instagramHandle') {
+      setFormData({ ...formData, instagramHandle: cleanInstagramHandle(value) })
+    } else {
+      setFormData({ ...formData, [name]: value })
+    }
   }
 
   const handleBioChange = (e) => {
@@ -83,6 +114,20 @@ const JoinPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+
+    // Photo validation
+    if (!photo) {
+      setError('Please upload your profile photo before submitting.')
+      return
+    }
+
+    const cleanedNumber = validateWhatsApp(formData.whatsappNumber)
+    if (!cleanedNumber) {
+      setError('Please enter a valid 10-digit WhatsApp number.')
+      setLoading(false)
+      return
+    }
+
     setLoading(true)
     setError('')
 
@@ -102,7 +147,7 @@ const JoinPage = () => {
         instagramHandle: formData.instagramHandle,
         experience: formData.experience,
         eventsCount: formData.eventsCount,
-        whatsappNumber: formData.whatsappNumber,
+        whatsappNumber: cleanedNumber,
         memberSince: formData.memberSince,
         languages: formData.languages.split(',').map(l => l.trim()).filter(Boolean),
         specialisations: formData.specialisations.split(',').map(s => s.trim()).filter(Boolean),
@@ -161,7 +206,7 @@ const JoinPage = () => {
             </div>
           </div>
           <label className="photo-upload-btn">
-            Choose Photo
+            Choose Photo *
             <input
               type="file"
               accept="image/*,.heic,.heif"
@@ -210,12 +255,23 @@ const JoinPage = () => {
           </div>
 
           <div className="join-field">
-            <label>Instagram Handle</label>
-            <input type="text" name="instagramHandle" value={formData.instagramHandle} onChange={handleChange} placeholder="@yourusername" />
+            <label>Instagram Handle *</label>
+            <input
+              type="text"
+              name="instagramHandle"
+              value={formData.instagramHandle}
+              onChange={handleChange}
+              onBlur={(e) => setFormData({
+                ...formData,
+                instagramHandle: cleanInstagramHandle(e.target.value)
+              })}
+              placeholder="@yourusername"
+              required
+            />
           </div>
 
           <div className="join-field">
-            <label>Experience (in years)</label>
+            <label>Experience (in years) *</label>
             <input
               type="number"
               name="experience"
@@ -223,11 +279,12 @@ const JoinPage = () => {
               onChange={handleChange}
               placeholder="e.g. 5"
               min="0"
+              required
             />
           </div>
 
           <div className="join-field">
-            <label>Events Done</label>
+            <label>Events Done *</label>
             <input
               type="number"
               name="eventsCount"
@@ -235,27 +292,29 @@ const JoinPage = () => {
               onChange={handleChange}
               placeholder="e.g. 100"
               min="0"
+              required
             />
           </div>
 
           <div className="join-field full">
-            <label>Languages (comma separated)</label>
-            <input type="text" name="languages" value={formData.languages} onChange={handleChange} placeholder="Hindi, English, Gujarati" />
+            <label>Languages (comma separated) *</label>
+            <input type="text" name="languages" value={formData.languages} onChange={handleChange} placeholder="Hindi, English, Gujarati" required />
           </div>
 
           <div className="join-field full">
-            <label>Specialisations (comma separated)</label>
-            <input type="text" name="specialisations" value={formData.specialisations} onChange={handleChange} placeholder="Wedding, Corporate, Awards" />
+            <label>Specialisations (comma separated) *</label>
+            <input type="text" name="specialisations" value={formData.specialisations} onChange={handleChange} placeholder="Wedding, Corporate, Awards" required />
           </div>
 
           <div className="join-field full">
-            <label>Bio ({formData.bio.trim().split(/\s+/).filter(Boolean).length}/50 words)</label>
+            <label>Bio ({formData.bio.trim().split(/\s+/).filter(Boolean).length}/50 words) *</label>
             <textarea
               name="bio"
               value={formData.bio}
               onChange={handleBioChange}
               placeholder="Tell us about yourself..."
               rows={4}
+              required
             />
           </div>
         </div>
