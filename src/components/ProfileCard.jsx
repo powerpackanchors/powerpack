@@ -50,9 +50,11 @@ const ProfileCard = ({ artist, onClick }) => {
             <span className="card-languages">{(artist.languages || []).join(', ')}</span>
           </div>
         </div>
-        <div className={`tier-badge ${getTierClass(artist.tier)}`}>
-          {artist.tier || 'Open'}
-        </div>
+        {artist.category === 'Anchors' && (
+          <div className={`tier-badge ${getTierClass(artist.tier)}`}>
+            {artist.tier || 'Open'}
+          </div>
+        )}
       </div>
 
       <div className="card-stats">

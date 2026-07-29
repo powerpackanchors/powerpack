@@ -84,9 +84,11 @@ const ProfileModal = ({ artist, onClose }) => {
           <div className="modal-info">
             <h2>{artist.name || 'Anonymous'}</h2>
             <span className="modal-role">{artist.city || 'Location N/A'} • Since {artist.memberSince || 'N/A'}</span>
-            <div className={`tier-badge ${getTierClass(artist.tier)}`} style={{ display: 'inline-block' }}>
-              {artist.tier || 'Open'} Artist
-            </div>
+            {artist.category === 'Anchors' && (
+              <div className={`tier-badge ${getTierClass(artist.tier)}`} style={{ display: 'inline-block' }}>
+                {artist.tier || 'Open'} Artist
+              </div>
+            )}
           </div>
         </div>
 
