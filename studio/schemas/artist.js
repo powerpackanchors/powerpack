@@ -3,6 +3,13 @@ export default {
   title: 'Artist',
   type: 'document',
   fields: [
+    {
+      name: 'featured',
+      title: 'Featured (Show at top)',
+      type: 'boolean',
+      initialValue: false,
+      description: 'Turn on to show this artist at the top of the list'
+    },
     { name: 'name', title: 'Name', type: 'string' },
     {
       name: 'category',

@@ -40,7 +40,17 @@ const DJsPage = ({ onArtistClick }) => {
     }
 
     Promise.all([
-      client.fetch(`*[_type == "artist" && category == "DJs"] | order(name asc)`),
+      client.fetch(`*[_type == "artist" && category == "DJs"] {
+        ...,
+        "isFeatured": coalesce(featured, false),
+        "tierRank": select(
+          tier == "Elite" => 1,
+          tier == "Premium" => 2,
+          tier == "Official" => 3,
+          tier == "Open" => 4,
+          5
+        )
+      } | order(isFeatured desc, tierRank asc, name asc)`),
       client.fetch(`*[_type == "reel" && category == "DJs"]`)
     ])
       .then(([artistsData, reelsData]) => {

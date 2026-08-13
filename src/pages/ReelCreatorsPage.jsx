@@ -40,7 +40,17 @@ const ReelCreatorsPage = ({ onArtistClick }) => {
     }
 
     Promise.all([
-      client.fetch(`*[_type == "artist" && category == "Reel Creators"] | order(name asc)`),
+      client.fetch(`*[_type == "artist" && category == "Reel Creators"] {
+        ...,
+        "isFeatured": coalesce(featured, false),
+        "tierRank": select(
+          tier == "Elite" => 1,
+          tier == "Premium" => 2,
+          tier == "Official" => 3,
+          tier == "Open" => 4,
+          5
+        )
+      } | order(isFeatured desc, tierRank asc, name asc)`),
       client.fetch(`*[_type == "reel" && category == "Reel Creators"]`)
     ])
       .then(([artistsData, reelsData]) => {

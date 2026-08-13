@@ -50,7 +50,17 @@ const Categories = ({ activeCategory, onCategoryChange }) => {
     if (getCached(cacheKey)) return; // already cached
 
     client.fetch(
-      `*[_type == "artist" && category == $category][0...6]`,
+      `*[_type == "artist" && category == $category] {
+        ...,
+        "isFeatured": coalesce(featured, false),
+        "tierRank": select(
+          tier == "Elite" => 1,
+          tier == "Premium" => 2,
+          tier == "Official" => 3,
+          tier == "Open" => 4,
+          5
+        )
+      } | order(isFeatured desc, tierRank asc, name asc)[0...6]`,
       { category: sanityCat }
     )
       .then(data => {

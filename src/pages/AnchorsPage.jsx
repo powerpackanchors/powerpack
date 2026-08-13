@@ -44,7 +44,17 @@ const AnchorsPage = ({ onArtistClick }) => {
     }
 
     Promise.all([
-      client.fetch(`*[_type == "artist" && category == "Anchors"] | order(name asc)`),
+      client.fetch(`*[_type == "artist" && category == "Anchors"] {
+        ...,
+        "isFeatured": coalesce(featured, false),
+        "tierRank": select(
+          tier == "Elite" => 1,
+          tier == "Premium" => 2,
+          tier == "Official" => 3,
+          tier == "Open" => 4,
+          5
+        )
+      } | order(isFeatured desc, tierRank asc, name asc)`),
       client.fetch(`*[_type == "reel" && category == "Anchors"]`)
     ])
       .then(([artistsData, reelsData]) => {
