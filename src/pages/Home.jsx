@@ -103,7 +103,7 @@ const Home = ({ onArtistClick }) => {
         </>
       )}
       
-      {reelsLoading ? (
+      {/* {reelsLoading ? (
         <div className="skeleton-grid">
           {[...Array(6)].map((_, i) => (
             <div key={i} className="skeleton-card"></div>
@@ -111,7 +111,7 @@ const Home = ({ onArtistClick }) => {
         </div>
       ) : (
         <Gallery videos={reels} title="Trending Reels" showViewAll={true} />
-      )}
+      )} */}
       
       <FounderSection />
       

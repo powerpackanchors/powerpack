@@ -16,7 +16,7 @@ const Footer = () => {
           <div className="footer-nav">
             <Link to="/">Home</Link>
             <Link to="/anchors">Artists</Link>
-            <Link to="/gallery">Gallery</Link>
+            {/* <Link to="/gallery">Gallery</Link> */}
             <Link to="#">Privacy Policy</Link>
           </div>
         </div>
