@@ -52,6 +52,18 @@ const Navbar = () => {
         <Link to="/" onClick={() => setMobileMenuOpen(false)}>Home</Link>
         <Link to="/anchors" onClick={() => setMobileMenuOpen(false)}>Artists</Link>
         {/* <Link to="/gallery" onClick={() => setMobileMenuOpen(false)}>Gallery</Link> */}
+        <a
+          href="#events"
+          className="nav-link"
+          onClick={(e) => {
+            e.preventDefault();
+            setMobileMenuOpen(false);
+            const el = document.getElementById('events');
+            if (el) el.scrollIntoView({ behavior: 'smooth' });
+          }}
+        >
+          Events
+        </a>
         <a href="/join" className="nav-link">Join Us</a>
         <button className="navbar-book-btn nav-cta" onClick={handleBookArtist}>Book an Artist</button>
       </div>

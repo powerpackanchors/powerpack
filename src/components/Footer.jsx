@@ -17,6 +17,20 @@ const Footer = () => {
             <Link to="/">Home</Link>
             <Link to="/anchors">Artists</Link>
             {/* <Link to="/gallery">Gallery</Link> */}
+            <a
+              href="#events"
+              className="f-link"
+              onClick={(e) => {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                setTimeout(() => {
+                  const el = document.getElementById('events');
+                  if (el) el.scrollIntoView({ behavior: 'smooth' });
+                }, 300);
+              }}
+            >
+              Events
+            </a>
             <Link to="#">Privacy Policy</Link>
           </div>
         </div>

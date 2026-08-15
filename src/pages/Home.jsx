@@ -10,6 +10,7 @@ import CTASection from '../components/CTASection';
 import Gallery from '../components/Gallery';
 import { client } from '../sanityClient';
 import { getCached, setCached } from '../utils/sanityCache';
+import '../styles/home.css';
 
 const Home = ({ onArtistClick }) => {
   const [activeCategory, setActiveCategory] = useState('anchors');
@@ -113,6 +114,29 @@ const Home = ({ onArtistClick }) => {
         <Gallery videos={reels} title="Trending Reels" showViewAll={true} />
       )} */}
       
+      <section className="events-section" id="events">
+        <div className="events-header">
+          <span className="events-eyebrow">Upcoming Events</span>
+          <h2 className="events-title">What's <span>Coming Up</span></h2>
+        </div>
+        <div className="events-banners">
+          <div className="event-banner-card">
+            <img
+              src="https://res.cloudinary.com/da7ewmcje/image/upload/v1786792043/Meetup_5_awty4x.png"
+              alt="Upcoming Event 1"
+              className="event-banner-img"
+            />
+          </div>
+          <div className="event-banner-card">
+            <img
+              src="https://res.cloudinary.com/da7ewmcje/image/upload/v1786792060/Powerpack_Rasratri_s4fu6v.png"
+              alt="Upcoming Event 2"
+              className="event-banner-img"
+            />
+          </div>
+        </div>
+      </section>
+
       <FounderSection />
       
       <div id="contact">
